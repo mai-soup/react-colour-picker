@@ -5,7 +5,6 @@ const Container = styled("div")({
   borderRadius: "5px",
   padding: "0.5rem",
   position: "relative",
-  overflow: "hidden",
   "&:hover": {
     cursor: "pointer",
   },
@@ -27,10 +26,33 @@ const Emoji = styled("span")({
   fontSize: "1.5rem",
 });
 
+const ColoursContainer = styled("div")({
+  height: "125px",
+  width: "100%",
+  backgroundColor: "#dae1e4",
+  borderRadius: "5px",
+  overflow: "hidden",
+});
+
+const SingleColour = styled("div")({
+  height: "25%",
+  width: "20%",
+  display: "inline-block",
+  position: "relative",
+  marginBottom: "-4px",
+});
+
 const MiniPalette = ({ colors, emoji, id, paletteName }) => {
   return (
     <Container>
-      <div></div>
+      <ColoursContainer>
+        {colors.map(c => (
+          <SingleColour
+            style={{ backgroundColor: c.color }}
+            key={c.name}
+          ></SingleColour>
+        ))}
+      </ColoursContainer>
       <Title>
         {paletteName} <Emoji>{emoji}</Emoji>
       </Title>
