@@ -1,16 +1,17 @@
 import Palette from "./Palette";
 import seedColours from "./seedColours";
 import generatePalette from "./colourHelpers";
-import { Route, Routes } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import PaletteList from "./PaletteList";
 import SingleColourPalette from "./SingleColourPalette";
 import NewPaletteForm from "./NewPaletteForm";
+import { useState } from "react";
 
 function App() {
+  const [palettes, setPalettes] = useState(seedColours);
   function GetPalette() {
     const { id } = useParams();
-    const found = seedColours.find(p => {
+    const found = palettes.find(p => {
       return p.id === id;
     });
     const palette = generatePalette(found);
@@ -19,7 +20,7 @@ function App() {
   function GetSingleColourPalette() {
     const { paletteId, colourId } = useParams();
     const bigPalette = generatePalette(
-      seedColours.find(p => {
+      palettes.find(p => {
         return p.id === paletteId;
       })
     );
@@ -38,10 +39,17 @@ function App() {
     return <SingleColourPalette palette={subPalette} />;
   }
 
+  const savePalette = newPalette => {
+    setPalettes(p => [...p, newPalette]);
+  };
+
   return (
     <Routes>
-      <Route path="/" element={<PaletteList palettes={seedColours} />} />
-      <Route path="/palette/new" element={<NewPaletteForm />} />
+      <Route path="/" element={<PaletteList palettes={palettes} />} />
+      <Route
+        path="/palette/new"
+        element={<NewPaletteForm savePalette={savePalette} />}
+      />
       <Route path="/palette/:id" element={<GetPalette />} />
       <Route
         path="/palette/:paletteId/:colourId"

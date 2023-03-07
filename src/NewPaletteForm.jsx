@@ -23,6 +23,7 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import { ChromePicker } from "react-color";
 import DraggableColourBox from "./DraggableColourBox";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 330;
 
@@ -72,7 +73,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-const NewPaletteForm = () => {
+const NewPaletteForm = ({ savePalette }) => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   const [currentColour, setColour] = useState("#008080");
   const [colours, updateColours] = useState([
@@ -103,6 +105,17 @@ const NewPaletteForm = () => {
     setName(e.target.value);
   };
 
+  const handlePaletteSubmission = () => {
+    const newName = "Test Palette";
+    const newPalette = {
+      paletteName: newName,
+      colors: colours,
+      id: newName.toLowerCase().replace(/\s/g, "-"),
+    };
+    savePalette(newPalette);
+    navigate("/");
+  };
+
   ValidatorForm.addValidationRule("isNameUnique", value =>
     colours.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
   );
@@ -120,7 +133,7 @@ const NewPaletteForm = () => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} color="default">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -134,6 +147,13 @@ const NewPaletteForm = () => {
           <Typography variant="h6" noWrap component="div">
             Create a New Palette
           </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handlePaletteSubmission}
+          >
+            Save Palette
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
