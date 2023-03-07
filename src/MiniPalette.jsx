@@ -42,9 +42,9 @@ const SingleColour = styled("div")({
   marginBottom: "-4px",
 });
 
-const MiniPalette = ({ colors, emoji, id, paletteName }) => {
+const MiniPalette = ({ colors, emoji, id, paletteName, handleClick }) => {
   return (
-    <Container>
+    <Container onClick={handleClick}>
       <ColoursContainer>
         {colors.map(c => (
           <SingleColour
