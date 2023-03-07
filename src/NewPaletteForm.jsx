@@ -95,11 +95,8 @@ const NewPaletteForm = () => {
 
   const addNewColour = () => {
     const newColour = { color: currentColour, name: currentName };
-    updateColours(c => {
-      const narr = [...c, newColour];
-      console.log("NEW COLOURS", narr);
-      return narr;
-    });
+    updateColours(c => [...c, newColour]);
+    setName("");
   };
 
   const handleNameChange = e => {
@@ -110,12 +107,7 @@ const NewPaletteForm = () => {
     colours.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
   );
   ValidatorForm.addValidationRule("isColourUnique", value =>
-    colours.every(c => {
-      console.log(colours);
-      console.log(c.color);
-      console.log(currentColour, c.color);
-      return c.color !== currentColour;
-    })
+    colours.every(c => c.color !== currentColour)
   );
 
   useEffect(() => {
