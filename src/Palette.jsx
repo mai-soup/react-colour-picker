@@ -26,7 +26,7 @@ const Palette = ({ palette }) => {
       <Navbar {...{ level, levelChanged, handleFormatChange }} />
       <div className="Palette-colours">
         {palette.colors[level].map(c => (
-          <ColourBox background={c[format]} name={c.name} />
+          <ColourBox background={c[format]} name={c.name} key={c.id} />
         ))}
       </div>
       <Snackbar
@@ -48,7 +48,9 @@ const Palette = ({ palette }) => {
           </IconButton>,
         ]}
       />
-      {/* TODO: footer */}
+      <footer className="Palette-footer">
+        {palette.paletteName} <span className="emoji">{palette.emoji}</span>
+      </footer>
     </div>
   );
 };
