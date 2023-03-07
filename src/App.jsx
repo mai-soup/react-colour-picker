@@ -3,6 +3,7 @@ import seedColours from "./seedColours";
 import generatePalette from "./colourHelpers";
 import { Route, Routes } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import PaletteList from "./PaletteList";
 
 function App() {
   function GetPalette() {
@@ -15,7 +16,7 @@ function App() {
   }
   return (
     <Routes>
-      <Route path="/" element={<h1>Mini palettes</h1>} />
+      <Route path="/" element={<PaletteList palettes={seedColours} />} />
       <Route path="/palette/:id" element={<GetPalette />} />
     </Routes>
   );

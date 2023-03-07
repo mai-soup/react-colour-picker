@@ -3,6 +3,7 @@ import "./Navbar.css";
 import Slider from "rc-slider";
 import { InputLabel, MenuItem, Select, FormControl } from "@mui/material";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ level, levelChanged, handleFormatChange }) => {
   const [format, setFormat] = useState("hex");
@@ -13,7 +14,7 @@ const Navbar = ({ level, levelChanged, handleFormatChange }) => {
   return (
     <header className="Navbar">
       <div className="logo">
-        <a href="/">reactcolourpicker</a>
+        <Link to="/">reactcolourpicker</Link>
       </div>
       <div className="slider-container">
         <span>Level: {level}</span>
