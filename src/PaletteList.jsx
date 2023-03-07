@@ -1,6 +1,7 @@
 import { styled } from "@mui/system";
 import MiniPalette from "./MiniPalette";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const PaletteList = ({ palettes, history }) => {
   const navigate = useNavigate();
@@ -14,7 +15,8 @@ const PaletteList = ({ palettes, history }) => {
     <Root>
       <Container>
         <Nav>
-          <h1>Colours woooo</h1>
+          <h1>react / colour / picker</h1>
+          <Link to="/palette/new">Create new</Link>
         </Nav>
         <Minis_Container>
           {palettes.map(p => (
@@ -32,7 +34,7 @@ const PaletteList = ({ palettes, history }) => {
 
 const Root = styled("div")({
   background: "blue",
-  height: "100vh",
+  minHeight: "100vh",
   display: "flex",
   alignItems: "flex-start",
   justifyContent: "center",
@@ -51,6 +53,10 @@ const Nav = styled("nav")({
   width: "100%",
   justifyContent: "space-between",
   color: "white",
+  alignItems: "center",
+  "& a": {
+    color: "white",
+  },
 });
 
 const Minis_Container = styled("div")({

@@ -4,6 +4,10 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
 import chroma from "chroma-js";
 
+// TODO: define styles here so don't have to repeat the contrast class
+// but can do it conditionally where needed
+// TODO: move styles to separate files in /src/styles, import the objects
+
 const ColourBox = ({ background, name, paletteId, colourId, single, back }) => {
   const [copied, setCopied] = useState(false);
   function changeCopyState() {

@@ -14,7 +14,7 @@ const Navbar = ({ level, levelChanged, handleFormatChange, hideLevel }) => {
   return (
     <header className="Navbar">
       <div className="logo">
-        <Link to="/">reactcolourpicker</Link>
+        <Link to="/">react / colour / picker</Link>
       </div>
       {!hideLevel && (
         <div className="slider-container">

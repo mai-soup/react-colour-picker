@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import PaletteList from "./PaletteList";
 import SingleColourPalette from "./SingleColourPalette";
+import NewPaletteForm from "./NewPaletteForm";
 
 function App() {
   function GetPalette() {
@@ -40,6 +41,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<PaletteList palettes={seedColours} />} />
+      <Route path="/palette/new" element={<NewPaletteForm />} />
       <Route path="/palette/:id" element={<GetPalette />} />
       <Route
         path="/palette/:paletteId/:colourId"
