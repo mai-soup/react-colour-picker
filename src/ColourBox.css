@@ -9,6 +9,14 @@
   cursor: grab;
 }
 
+.ColourBox.single {
+  height: 50%;
+}
+
+.ColourBox.single.back {
+  cursor: default;
+}
+
 .copy-button {
   width: 100px;
   height: 30px;
@@ -28,6 +36,26 @@
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.4s ease-out;
+  text-transform: uppercase;
+}
+
+.back-button {
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -15px;
+  text-align: center;
+  outline: none;
+  background: rgba(255, 255, 255, 0.3);
+  font-size: 1rem;
+  line-height: 30px;
+  color: white;
+  border: none;
+  cursor: pointer;
   text-transform: uppercase;
 }
 

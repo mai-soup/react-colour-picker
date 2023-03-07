@@ -5,7 +5,7 @@ import { InputLabel, MenuItem, Select, FormControl } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ level, levelChanged, handleFormatChange }) => {
+const Navbar = ({ level, levelChanged, handleFormatChange, hideLevel }) => {
   const [format, setFormat] = useState("hex");
   const onFormatChange = e => {
     setFormat(e.target.value);
@@ -16,18 +16,20 @@ const Navbar = ({ level, levelChanged, handleFormatChange }) => {
       <div className="logo">
         <Link to="/">reactcolourpicker</Link>
       </div>
-      <div className="slider-container">
-        <span>Level: {level}</span>
-        <div className="slider">
-          <Slider
-            defaultValue={level}
-            min={100}
-            max={900}
-            step={100}
-            onChange={levelChanged}
-          />
+      {!hideLevel && (
+        <div className="slider-container">
+          <span>Level: {level}</span>
+          <div className="slider">
+            <Slider
+              defaultValue={level}
+              min={100}
+              max={900}
+              step={100}
+              onChange={levelChanged}
+            />
+          </div>
         </div>
-      </div>
+      )}
       <div className="select-container">
         <FormControl size="small">
           <InputLabel id="format-select-label">Format</InputLabel>
