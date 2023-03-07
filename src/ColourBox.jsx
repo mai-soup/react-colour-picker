@@ -41,9 +41,11 @@ const ColourBox = ({ background, name, paletteId, colourId, single, back }) => {
               <button className="copy-button">Copy</button>
             </CopyToClipboard>
           </div>
-          <Link to={`/palette/${paletteId}/${colourId}`}>
-            <span className="see-more">MORE</span>
-          </Link>
+          {!single && (
+            <Link to={`/palette/${paletteId}/${colourId}`}>
+              <span className="see-more">MORE</span>
+            </Link>
+          )}
         </>
       ) : (
         <Link to={`/palette/${paletteId}/`}>
