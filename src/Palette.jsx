@@ -26,7 +26,13 @@ const Palette = ({ palette }) => {
       <Navbar {...{ level, levelChanged, handleFormatChange }} />
       <div className="Palette-colours">
         {palette.colors[level].map(c => (
-          <ColourBox background={c[format]} name={c.name} key={c.id} />
+          <ColourBox
+            background={c[format]}
+            name={c.name}
+            key={c.id}
+            paletteId={palette.id}
+            colourId={c.id}
+          />
         ))}
       </div>
       <Snackbar
