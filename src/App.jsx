@@ -48,7 +48,9 @@ function App() {
       <Route path="/" element={<PaletteList palettes={palettes} />} />
       <Route
         path="/palette/new"
-        element={<NewPaletteForm savePalette={savePalette} />}
+        element={
+          <NewPaletteForm savePalette={savePalette} palettes={palettes} />
+        }
       />
       <Route path="/palette/:id" element={<GetPalette />} />
       <Route
