@@ -1,7 +1,8 @@
 import { styled } from "@mui/system";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { SortableElement } from "react-sortable-hoc";
 
-const DraggableColourBox = ({ colour, deleteColour }) => {
+const DraggableColourBox = SortableElement(({ colour, deleteColour }) => {
   return (
     <Root style={{ backgroundColor: colour.color }}>
       <Content>
@@ -10,7 +11,7 @@ const DraggableColourBox = ({ colour, deleteColour }) => {
       </Content>
     </Root>
   );
-};
+});
 
 const Root = styled("div")({
   width: "20%",

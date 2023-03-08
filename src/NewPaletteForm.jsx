@@ -7,11 +7,8 @@ import {
   CssBaseline,
   AppBar as MuiAppBar,
   Toolbar,
-  List,
   Typography,
-  Divider,
   IconButton,
-  colors,
 } from "@mui/material";
 
 import {
@@ -22,8 +19,9 @@ import {
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import { ChromePicker } from "react-color";
-import DraggableColourBox from "./DraggableColourBox";
+import DraggableColourList from "./DraggableColourList";
 import { useNavigate } from "react-router-dom";
+import { arrayMove } from "react-sortable-hoc";
 
 const drawerWidth = 330;
 
@@ -73,14 +71,11 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-const NewPaletteForm = ({ savePalette, palettes }) => {
+const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   const [currentColour, setColour] = useState("#008080");
-  const [colours, updateColours] = useState([
-    { color: "#2DAC36", name: "gren" },
-    { color: "#F21498", name: "pink" },
-  ]);
+  const [colours, updateColours] = useState(palettes[0].colors);
   const [currentName, setName] = useState("");
   const [newPaletteName, setNewPaletteName] = useState("");
 
@@ -123,6 +118,23 @@ const NewPaletteForm = ({ savePalette, palettes }) => {
 
   const handleDeleteColour = name => {
     updateColours(colours.filter(c => c.name !== name));
+  };
+
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    updateColours(arrayMove(colours, oldIndex, newIndex));
+  };
+
+  const clearColours = () => {
+    updateColours([]);
+  };
+
+  const addRandomColour = () => {
+    // picks a rand colour from an existing palette
+    const allColors = palettes.map(p => p.colors).flat();
+    var i = Math.floor(Math.random() * allColors.length);
+    // TODO: make sure cant add duplicates either by colour or name
+    const randomColor = allColors[i];
+    updateColours([...colours, randomColor]);
   };
 
   ValidatorForm.addValidationRule("isNameUnique", value =>
@@ -196,10 +208,15 @@ const NewPaletteForm = ({ savePalette, palettes }) => {
         </DrawerHeader>
         <Typography variant="h4">Design Your Palette</Typography>
         <div>
-          <Button variant="contained" color="secondary">
+          <Button variant="contained" color="secondary" onClick={clearColours}>
             Clear palette
           </Button>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            disabled={colours.length >= maxColours}
+            onClick={addRandomColour}
+          >
             Random colour
           </Button>
         </div>
@@ -214,6 +231,7 @@ const NewPaletteForm = ({ savePalette, palettes }) => {
             label="Colour Name"
             value={currentName}
             onChange={handleNameChange}
+            disabled={colours.length >= maxColours}
             validators={["required", "isNameUnique", "isColourUnique"]}
             errorMessages={[
               "Name is required.",
@@ -224,7 +242,11 @@ const NewPaletteForm = ({ savePalette, palettes }) => {
           <Button
             variant="contained"
             color="primary"
-            style={{ backgroundColor: currentColour }}
+            style={{
+              backgroundColor:
+                colours.length >= maxColours ? "grey" : currentColour,
+            }}
+            disabled={colours.length >= maxColours}
             type="submit"
           >
             Add Colour
@@ -233,13 +255,12 @@ const NewPaletteForm = ({ savePalette, palettes }) => {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {colours.map((c, i) => (
-          <DraggableColourBox
-            key={i}
-            colour={c}
-            deleteColour={handleDeleteColour}
-          />
-        ))}
+        <DraggableColourList
+          colours={colours}
+          handleDeleteColour={handleDeleteColour}
+          axis="xy"
+          onSortEnd={onSortEnd}
+        />
       </Main>
     </Box>
   );
