@@ -29,6 +29,8 @@ const PaletteFormNav = ({
         <Typography variant="h6" noWrap component="div">
           Create a New Palette
         </Typography>
+      </Toolbar>
+      <NavButtons>
         <ValidatorForm
           onSubmit={() => {
             handlePaletteSubmission(currentInput);
@@ -44,19 +46,21 @@ const PaletteFormNav = ({
           <Button variant="contained" color="primary" type="submit">
             Save Palette
           </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Go Back
-          </Button>
         </ValidatorForm>
-      </Toolbar>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Go Back
+        </Button>
+      </NavButtons>
     </AppBar>
   );
 };
+
+const NavButtons = styled("div")({});
 
 export default PaletteFormNav;

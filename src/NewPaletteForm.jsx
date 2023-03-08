@@ -9,18 +9,17 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-
 import { ChevronLeft as ChevronLeftIcon } from "@mui/icons-material";
 
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { ValidatorForm } from "react-material-ui-form-validator";
 
-import { ChromePicker } from "react-color";
 import DraggableColourList from "./DraggableColourList";
 import { useNavigate } from "react-router-dom";
 import { arrayMove } from "react-sortable-hoc";
 import PaletteFormNav from "./PaletteFormNav";
+import ColourPickerForm from "./ColourPickerForm";
 
-const drawerWidth = 330;
+const drawerWidth = 375;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: prop => prop !== "open",
@@ -29,6 +28,8 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  flexDirection: "row",
+  justifyContent: "space-between",
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
@@ -172,6 +173,8 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
+            display: "flex",
+            alignItems: "center",
           },
         }}
         variant="persistent"
@@ -183,52 +186,40 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
-        <Typography variant="h4">Design Your Palette</Typography>
-        <div>
-          <Button variant="contained" color="secondary" onClick={clearColours}>
-            Clear palette
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            disabled={colours.length >= maxColours}
-            onClick={addRandomColour}
-          >
-            Random colour
-          </Button>
-        </div>
-        <ChromePicker
-          color={currentColour}
-          onChangeComplete={newCol => {
-            handleColorChange(newCol);
-          }}
-        />
-        <ValidatorForm onSubmit={addNewColour}>
-          <TextValidator
-            label="Colour Name"
-            value={currentName}
-            onChange={handleNameChange}
-            disabled={colours.length >= maxColours}
-            validators={["required", "isNameUnique", "isColourUnique"]}
-            errorMessages={[
-              "Name is required.",
-              "Colour names must be unique across the palette.",
-              "Colour already exists inside palette.",
-            ]}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            style={{
-              backgroundColor:
-                colours.length >= maxColours ? "grey" : currentColour,
+        <Container>
+          <Typography variant="h4" gutterBottom>
+            Design Your Palette
+          </Typography>
+          <ButtonsContainer>
+            <StyledButton
+              variant="contained"
+              color="secondary"
+              onClick={clearColours}
+            >
+              Clear palette
+            </StyledButton>
+            <StyledButton
+              StyledButton="contained"
+              color="primary"
+              disabled={colours.length >= maxColours}
+              onClick={addRandomColour}
+              sx={{ backgroundColor: "#1976d2", color: "white" }}
+            >
+              Random colour
+            </StyledButton>
+          </ButtonsContainer>
+          <ColourPickerForm
+            {...{
+              colours,
+              currentColour,
+              handleColorChange,
+              addNewColour,
+              currentName,
+              handleNameChange,
+              maxColours,
             }}
-            disabled={colours.length >= maxColours}
-            type="submit"
-          >
-            Add Colour
-          </Button>
-        </ValidatorForm>
+          />
+        </Container>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
@@ -242,5 +233,19 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
     </Box>
   );
 };
+
+const Container = styled("div")({
+  width: "90%",
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  textAlign: "center",
+});
+
+const ButtonsContainer = styled("div")({ width: "100%" });
+
+const StyledButton = styled(Button)({ width: "50%" });
 
 export default NewPaletteForm;
