@@ -1,7 +1,15 @@
 import { styled } from "@mui/system";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const DraggableColourBox = ({ colour }) => {
-  return <Root style={{ backgroundColor: colour.color }}>{colour.name}</Root>;
+  return (
+    <Root style={{ backgroundColor: colour.color }}>
+      <Content>
+        <span>{colour.name}</span>
+        <StyledDeleteIcon />
+      </Content>
+    </Root>
+  );
 };
 
 const Root = styled("div")({
@@ -13,6 +21,31 @@ const Root = styled("div")({
   textTransform: "uppercase",
   marginBottom: "-4px",
   cursor: "grab",
+  "&:hover svg": {
+    color: "white",
+    transform: "scale(1.35)",
+  },
+});
+
+// TODO: change text colour depending on luminance
+const Content = styled("div")({
+  position: "absolute",
+  padding: "10px",
+  paddingRight: "0",
+  width: "90%",
+  left: 0,
+  bottom: 0,
+  color: "black",
+  letterSpacing: "1px",
+  fontSize: "12px",
+  display: "flex",
+  justifyContent: "space-between",
+});
+
+const StyledDeleteIcon = styled(DeleteIcon)({
+  color: "rgba(0,0,0,0.5)",
+  transition: "all 0.3s",
+  cursor: "pointer",
 });
 
 export default DraggableColourBox;
