@@ -1,12 +1,12 @@
 import { styled } from "@mui/system";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const DraggableColourBox = ({ colour }) => {
+const DraggableColourBox = ({ colour, deleteColour }) => {
   return (
     <Root style={{ backgroundColor: colour.color }}>
       <Content>
         <span>{colour.name}</span>
-        <StyledDeleteIcon />
+        <StyledDeleteIcon onClick={() => deleteColour(colour.name)} />
       </Content>
     </Root>
   );
