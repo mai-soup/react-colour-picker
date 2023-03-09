@@ -1,6 +1,6 @@
 import { SortableContainer } from "react-sortable-hoc";
 import DraggableColourBox from "./DraggableColourBox";
-import { styled } from "@mui/system";
+import { Root } from "./styles/DraggableColourList.styles";
 
 const DraggableColourList = SortableContainer(
   ({ colours, handleDeleteColour }) => {
@@ -18,7 +18,5 @@ const DraggableColourList = SortableContainer(
     );
   }
 );
-
-const Root = styled("div")({ height: "100%" });
 
 export default DraggableColourList;

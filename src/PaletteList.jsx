@@ -1,10 +1,14 @@
-import { styled } from "@mui/system";
 import MiniPalette from "./MiniPalette";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import bg from "./images/scattered-forcefields.svg";
+import {
+  Root,
+  Container,
+  Nav,
+  Minis_Container,
+} from "./styles/PaletteList.styles";
 
-const PaletteList = ({ palettes, history }) => {
+const PaletteList = ({ palettes }) => {
   const navigate = useNavigate();
 
   function openPalette(id) {
@@ -32,43 +36,5 @@ const PaletteList = ({ palettes, history }) => {
     </Root>
   );
 };
-
-const Root = styled("div")({
-  backgroundColor: "#070857",
-  backgroundImage: `url(${bg})`,
-  backgroundAttachment: "fixed",
-  backgroundSize: "cover",
-  minHeight: "100vh",
-  display: "flex",
-  alignItems: "flex-start",
-  justifyContent: "center",
-});
-
-const Container = styled("div")({
-  width: "50%",
-  display: "flex",
-  alignItems: "flex-start",
-  flexDirection: "column",
-  flexWrap: "wrap",
-});
-
-const Nav = styled("nav")({
-  display: "flex",
-  width: "100%",
-  justifyContent: "space-between",
-  color: "white",
-  alignItems: "center",
-  "& a": {
-    color: "white",
-  },
-});
-
-const Minis_Container = styled("div")({
-  boxSizing: "border-box",
-  width: "100%",
-  display: "grid",
-  gridTemplateColumns: "repeat(3,30%)",
-  gap: "5%",
-});
 
 export default PaletteList;
