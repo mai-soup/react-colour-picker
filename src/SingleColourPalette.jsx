@@ -1,13 +1,17 @@
 import ColourBox from "./ColourBox";
-import "./Palette.css";
 import { useState } from "react";
 import Navbar from "./Navbar";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import {
+  Root,
+  ColoursContainer,
+  PaletteFooter,
+  Emoji,
+} from "./styles/Palette.styles";
 
 const SingleColourPalette = ({ palette }) => {
-  // TODO: deal with all these states
   const [format, setFormat] = useState("hex");
   const [open, setOpen] = useState(false);
   const levelChanged = newLevel => {
@@ -21,9 +25,9 @@ const SingleColourPalette = ({ palette }) => {
     setOpen(false);
   };
   return (
-    <div className="Palette">
+    <Root>
       <Navbar {...{ handleFormatChange }} hideLevel />
-      <div className="Palette-colours">
+      <ColoursContainer>
         {palette.colors.map(c => (
           <ColourBox
             background={c[format]}
@@ -35,7 +39,7 @@ const SingleColourPalette = ({ palette }) => {
           />
         ))}
         <ColourBox background="black" paletteId={palette.id} single back />
-      </div>
+      </ColoursContainer>
       <Snackbar
         open={open}
         autoHideDuration={3000}
@@ -55,10 +59,10 @@ const SingleColourPalette = ({ palette }) => {
           </IconButton>,
         ]}
       />
-      <footer className="Palette-footer">
-        {palette.paletteName} <span className="emoji">{palette.emoji}</span>
-      </footer>
-    </div>
+      <PaletteFooter>
+        {palette.paletteName} <Emoji>{palette.emoji}</Emoji>
+      </PaletteFooter>
+    </Root>
   );
 };
 
