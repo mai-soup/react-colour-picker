@@ -2,6 +2,7 @@ import { styled } from "@mui/system";
 import MiniPalette from "./MiniPalette";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import bg from "./images/scattered-forcefields.svg";
 
 const PaletteList = ({ palettes, history }) => {
   const navigate = useNavigate();
@@ -33,7 +34,10 @@ const PaletteList = ({ palettes, history }) => {
 };
 
 const Root = styled("div")({
-  background: "blue",
+  backgroundColor: "#070857",
+  backgroundImage: `url(${bg})`,
+  backgroundAttachment: "fixed",
+  backgroundSize: "cover",
   minHeight: "100vh",
   display: "flex",
   alignItems: "flex-start",
