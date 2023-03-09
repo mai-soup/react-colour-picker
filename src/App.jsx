@@ -42,13 +42,27 @@ function App() {
 
   const savePalette = newPalette => {
     const updatedPalettes = [...palettes, newPalette];
+    storePalettes(updatedPalettes);
+  };
+
+  const handleDelete = toDelId => {
+    const updatedPalettes = palettes.filter(p => p.id !== toDelId);
+    storePalettes(updatedPalettes);
+  };
+
+  const storePalettes = updatedPalettes => {
     setPalettes(updatedPalettes);
     window.localStorage.setItem("palettes", JSON.stringify(updatedPalettes));
   };
 
   return (
     <Routes>
-      <Route path="/" element={<PaletteList palettes={palettes} />} />
+      <Route
+        path="/"
+        element={
+          <PaletteList palettes={palettes} handleDelete={handleDelete} />
+        }
+      />
       <Route
         path="/palette/new"
         element={

@@ -8,7 +8,7 @@ import {
   Minis_Container,
 } from "./styles/PaletteList.styles";
 
-const PaletteList = ({ palettes }) => {
+const PaletteList = ({ palettes, handleDelete }) => {
   const navigate = useNavigate();
 
   function openPalette(id) {
@@ -29,6 +29,7 @@ const PaletteList = ({ palettes }) => {
               {...p}
               handleClick={() => openPalette(p.id)}
               key={p.paletteName}
+              handleDelete={handleDelete}
             />
           ))}
         </Minis_Container>
