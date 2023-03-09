@@ -1,10 +1,11 @@
 import { React } from "react";
-import { Button } from "@mui/material";
-import { styled } from "@mui/system";
-
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-
-import { ChromePicker } from "react-color";
+import { ValidatorForm } from "react-material-ui-form-validator";
+import {
+  Root,
+  StyledChromePicker,
+  StyledInput,
+  AddColourButton,
+} from "./styles/ColourPickerForm.styles";
 
 const ColourPickerForm = ({
   colours,
@@ -54,24 +55,5 @@ const ColourPickerForm = ({
     </Root>
   );
 };
-
-const Root = styled("div")({});
-
-const StyledChromePicker = styled(ChromePicker)({
-  width: "100% !important",
-  marginTop: "2rem",
-});
-
-const AddColourButton = styled(Button)({
-  width: "100%",
-  padding: "1rem",
-  marginTop: "1rem",
-  fontSize: "2rem",
-});
-
-const StyledInput = styled(TextValidator)({
-  width: "100%",
-  height: "70px",
-});
 
 export default ColourPickerForm;

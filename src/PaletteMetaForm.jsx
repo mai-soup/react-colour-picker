@@ -57,9 +57,6 @@ const PaletteMetaForm = ({ handlePaletteSubmission }) => {
               validators={["required", "isPaletteNameUnique"]}
               errorMessages={["Palette name required.", "Name already in use."]}
             />
-            {/* <Button variant="contained" color="primary" type="submit">
-              Save Palette
-            </Button> */}
           </DialogContent>
           <DialogActions>
             <Button type="button" onClick={handleClose}>

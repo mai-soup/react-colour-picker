@@ -20,7 +20,7 @@ const Root = styled("div")({
   display: "inline-block",
   position: "relative",
   textTransform: "uppercase",
-  marginBottom: "-4px",
+  marginBottom: "-7px",
   cursor: "grab",
   "&:hover svg": {
     color: "white",

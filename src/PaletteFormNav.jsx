@@ -1,15 +1,12 @@
-import { styled, Button, Toolbar, Typography, IconButton } from "@mui/material";
-
+import { Button, Toolbar, Typography, IconButton } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import { useState } from "react";
 import PaletteMetaForm from "./PaletteMetaForm";
+import { AppBar } from "./styles/NewPaletteForm.styles";
 
 const PaletteFormNav = ({
   handleDrawerOpen,
   handlePaletteSubmission,
   open,
-  AppBar,
 }) => {
   return (
     <AppBar position="fixed" open={open} color="default">
@@ -27,7 +24,7 @@ const PaletteFormNav = ({
           Create a New Palette
         </Typography>
       </Toolbar>
-      <NavButtons>
+      <div>
         <PaletteMetaForm handlePaletteSubmission={handlePaletteSubmission} />
         <Button
           variant="contained"
@@ -38,11 +35,9 @@ const PaletteFormNav = ({
         >
           Go Back
         </Button>
-      </NavButtons>
+      </div>
     </AppBar>
   );
 };
-
-const NavButtons = styled("div")({});
 
 export default PaletteFormNav;

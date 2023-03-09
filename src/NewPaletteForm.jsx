@@ -1,10 +1,7 @@
 import { React, useState, useEffect } from "react";
 import {
-  styled,
   Box,
-  Button,
   Drawer,
-  AppBar as MuiAppBar,
   CssBaseline,
   Typography,
   IconButton,
@@ -18,56 +15,14 @@ import { useNavigate } from "react-router-dom";
 import { arrayMove } from "react-sortable-hoc";
 import PaletteFormNav from "./PaletteFormNav";
 import ColourPickerForm from "./ColourPickerForm";
-
-const drawerWidth = 375;
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: prop => prop !== "open",
-})(({ theme, open }) => ({
-  transition: theme.transitions.create(["margin", "width"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  flexDirection: "row",
-  justifyContent: "space-between",
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Main = styled("main", { shouldForwardProp: prop => prop !== "open" })(
-  ({ theme, open }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    height: "calc(100vh - 64px)",
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: `-${drawerWidth}px`,
-    ...(open && {
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    }),
-  })
-);
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: "flex-end",
-}));
+import { DRAWER_WIDTH } from "./constants";
+import {
+  Main,
+  DrawerHeader,
+  Container,
+  ButtonsContainer,
+  StyledButton,
+} from "./styles/NewPaletteForm.styles";
 
 const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
   const navigate = useNavigate();
@@ -163,16 +118,15 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
         handlePaletteNameChange={handlePaletteNameChange}
         handlePaletteSubmission={handlePaletteSubmission}
         newPaletteName={newPaletteName}
-        drawerWidth={drawerWidth}
+        drawerWidth={DRAWER_WIDTH}
         open={open}
-        AppBar={AppBar}
       />
       <Drawer
         sx={{
-          width: drawerWidth,
+          width: DRAWER_WIDTH,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            width: drawerWidth,
+            width: DRAWER_WIDTH,
             boxSizing: "border-box",
             display: "flex",
             alignItems: "center",
@@ -234,19 +188,5 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
     </Box>
   );
 };
-
-const Container = styled("div")({
-  width: "90%",
-  height: "100%",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  textAlign: "center",
-});
-
-const ButtonsContainer = styled("div")({ width: "100%" });
-
-const StyledButton = styled(Button)({ width: "50%" });
 
 export default NewPaletteForm;
