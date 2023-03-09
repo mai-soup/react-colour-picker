@@ -1,5 +1,6 @@
 import { styled } from "@mui/system";
 import bg from "../images/scattered-forcefields.svg";
+import sizes from "./sizes";
 
 export const Root = styled("div")({
   backgroundColor: "#070857",
@@ -7,6 +8,7 @@ export const Root = styled("div")({
   backgroundAttachment: "fixed",
   backgroundSize: "cover",
   minHeight: "100vh",
+  overflow: "auto",
   display: "flex",
   alignItems: "flex-start",
   justifyContent: "center",
@@ -37,4 +39,11 @@ export const Minis_Container = styled("div")({
   display: "grid",
   gridTemplateColumns: "repeat(3,30%)",
   gap: "5%",
+  [sizes.down("md")]: {
+    gridTemplateColumns: "repeat(2, 50%)",
+    gap: "1rem",
+  },
+  [sizes.down("xs")]: {
+    gridTemplateColumns: "repeat(1, 100%)",
+  },
 });
