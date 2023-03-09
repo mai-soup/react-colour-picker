@@ -8,7 +8,8 @@ import NewPaletteForm from "./NewPaletteForm";
 import { useState } from "react";
 
 function App() {
-  const [palettes, setPalettes] = useState(seedColours);
+  const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
+  const [palettes, setPalettes] = useState(savedPalettes || seedColours);
   function GetPalette() {
     const { id } = useParams();
     const found = palettes.find(p => {
@@ -40,7 +41,9 @@ function App() {
   }
 
   const savePalette = newPalette => {
-    setPalettes(p => [...p, newPalette]);
+    const updatedPalettes = [...palettes, newPalette];
+    setPalettes(updatedPalettes);
+    window.localStorage.setItem("palettes", JSON.stringify(updatedPalettes));
   };
 
   return (
