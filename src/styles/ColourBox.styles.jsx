@@ -23,6 +23,9 @@ export const CopyMessage = styled("div")(props => ({
   justifyContent: "center",
   flexDirection: "column",
   fontSize: "4rem",
+  [sizes.down("xs")]: {
+    fontSize: "6rem",
+  },
   color: props.darkMode ? "white" : "black",
   transform: props.show ? "scale(1)" : "scale(0.1)",
   opacity: props.show ? 1 : 0,
@@ -59,11 +62,11 @@ export const Root = styled("div")(props => ({
   },
   [sizes.down("lg")]: {
     width: "25%",
-    height: props.single ? "50%" : "20%",
+    height: props.single ? "33.33%" : "20%",
   },
   [sizes.down("md")]: {
     width: "50%",
-    height: props.single ? "50%" : "10%",
+    height: props.single ? "20%" : "10%",
   },
   [sizes.down("xs")]: {
     width: "100%",
