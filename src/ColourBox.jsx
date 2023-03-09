@@ -1,12 +1,17 @@
 import { useState } from "react";
-import "./ColourBox.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
 import chroma from "chroma-js";
-
-// TODO: define styles here so don't have to repeat the contrast class
-// but can do it conditionally where needed
-// TODO: move styles to separate files in /src/styles, import the objects
+import {
+  CopyMessage,
+  CopyOverlay,
+  Root,
+  CopyContainer,
+  BoxContent,
+  CopyButton,
+  SeeMore,
+  BackButton,
+} from "./styles/ColourBox.styles";
 
 const ColourBox = ({ background, name, paletteId, colourId, single, back }) => {
   const [copied, setCopied] = useState(false);
@@ -26,26 +31,20 @@ const ColourBox = ({ background, name, paletteId, colourId, single, back }) => {
   const bgLuminance = chroma(background).luminance();
   const whiteLumRatio = (wLum + 0.05) / (bgLuminance + 0.05);
   const blackLumRatio = (bgLuminance + 0.05) / (bLum + 0.05);
-  const contrClass = whiteLumRatio < blackLumRatio ? " bg-light" : " bg-dark";
+  const darkBg = whiteLumRatio > blackLumRatio;
   return (
-    <div
-      style={{ background }}
-      className={`ColourBox ${single && "single"} ${back && "back"}`}
-    >
-      <div
-        style={{ background }}
-        className={`copy-overlay ${copied ? "show" : ""}`}
-      />
+    <Root style={{ background }} single={single}>
+      <CopyOverlay style={{ background }} show={copied} />
       {!back ? (
         <>
-          <div className={`copy-msg ${copied ? "show" : ""}`}>
-            <h1 className={contrClass}>Copied!</h1>
-            <p className={contrClass}>{background}</p>
-          </div>
-          <div className="copy-container">
-            <div className="box-content">
-              <span className={contrClass}>{name}</span>
-            </div>
+          <CopyMessage show={copied} darkMode={darkBg}>
+            <h1>Copied!</h1>
+            <p>{background}</p>
+          </CopyMessage>
+          <CopyContainer>
+            <BoxContent darkMode={darkBg}>
+              <span>{name}</span>
+            </BoxContent>
             <CopyToClipboard
               text={background}
               onCopy={() => {
@@ -53,21 +52,21 @@ const ColourBox = ({ background, name, paletteId, colourId, single, back }) => {
                 changeCopyState();
               }}
             >
-              <button className={`copy-button ${contrClass}`}>Copy</button>
+              <CopyButton darkMode={darkBg}>Copy</CopyButton>
             </CopyToClipboard>
-          </div>
+          </CopyContainer>
           {!single && (
             <Link to={`/palette/${paletteId}/${colourId}`}>
-              <span className={`see-more ${contrClass}`}>MORE</span>
+              <SeeMore darkMode={darkBg}>MORE</SeeMore>
             </Link>
           )}
         </>
       ) : (
         <Link to={`/palette/${paletteId}/`}>
-          <button className="back-button">Go back</button>
+          <BackButton>Go back</BackButton>
         </Link>
       )}
-    </div>
+    </Root>
   );
 };
 
