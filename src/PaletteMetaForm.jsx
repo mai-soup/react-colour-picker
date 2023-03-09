@@ -5,21 +5,36 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { React, useState } from "react";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+
+const STATE_FORM_OPEN = 345;
+const STATE_EMOJIS_OPEN = 346;
+const STATE_CLOSED = 347;
 
 const PaletteMetaForm = ({ handlePaletteSubmission }) => {
   // TODO: style the dialog
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(STATE_CLOSED);
   const [currentInput, setInput] = useState("");
   const handleInput = e => {
     setInput(e.target.value);
   };
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen(STATE_FORM_OPEN);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen(STATE_CLOSED);
+  };
+
+  const handleNamePicked = () => {
+    setOpen(STATE_EMOJIS_OPEN);
+  };
+
+  const handleEmojiSelect = emoji => {
+    setOpen(STATE_CLOSED);
+    handlePaletteSubmission(currentInput, emoji.native);
   };
 
   return (
@@ -31,14 +46,10 @@ const PaletteMetaForm = ({ handlePaletteSubmission }) => {
       >
         Save Palette
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open === STATE_FORM_OPEN} onClose={handleClose}>
         <DialogTitle>Enter Palette Name</DialogTitle>
-        <DialogContent>
-          <ValidatorForm
-            onSubmit={() => {
-              handlePaletteSubmission(currentInput);
-            }}
-          >
+        <ValidatorForm onSubmit={handleNamePicked}>
+          <DialogContent>
             <TextValidator
               label="Name"
               value={currentInput}
@@ -46,14 +57,27 @@ const PaletteMetaForm = ({ handlePaletteSubmission }) => {
               validators={["required", "isPaletteNameUnique"]}
               errorMessages={["Palette name required.", "Name already in use."]}
             />
-            <Button variant="contained" color="primary" type="submit">
+            {/* <Button variant="contained" color="primary" type="submit">
               Save Palette
+            </Button> */}
+          </DialogContent>
+          <DialogActions>
+            <Button type="button" onClick={handleClose}>
+              Cancel
             </Button>
-          </ValidatorForm>
+            <Button type="submit" variant="contained" color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </ValidatorForm>
+      </Dialog>
+      <Dialog open={open === STATE_EMOJIS_OPEN} onClose={handleClose}>
+        <DialogTitle>Choose an emoji</DialogTitle>
+        <DialogContent>
+          <Picker data={data} onEmojiSelect={handleEmojiSelect} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
         </DialogActions>
       </Dialog>
     </div>
