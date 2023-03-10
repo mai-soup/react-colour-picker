@@ -1,9 +1,14 @@
 import "rc-slider/assets/index.css";
-import "./Navbar.css";
 import Slider from "rc-slider";
 import { InputLabel, MenuItem, Select, FormControl } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  Root,
+  Logo,
+  SliderContainer,
+  LevelControlsContainer,
+} from "./styles/Navbar.styles";
 
 const Navbar = ({ level, levelChanged, handleFormatChange, hideLevel }) => {
   const [format, setFormat] = useState("hex");
@@ -12,14 +17,14 @@ const Navbar = ({ level, levelChanged, handleFormatChange, hideLevel }) => {
     handleFormatChange(e.target.value);
   };
   return (
-    <header className="Navbar">
-      <div className="logo">
+    <Root>
+      <Logo>
         <Link to="/">react / colour / picker</Link>
-      </div>
+      </Logo>
       {!hideLevel && (
-        <div className="slider-container">
+        <LevelControlsContainer>
           <span>Level: {level}</span>
-          <div className="slider">
+          <SliderContainer>
             <Slider
               defaultValue={level}
               min={100}
@@ -27,8 +32,8 @@ const Navbar = ({ level, levelChanged, handleFormatChange, hideLevel }) => {
               step={100}
               onChange={levelChanged}
             />
-          </div>
-        </div>
+          </SliderContainer>
+        </LevelControlsContainer>
       )}
       <div className="select-container">
         <FormControl size="small">
@@ -46,7 +51,7 @@ const Navbar = ({ level, levelChanged, handleFormatChange, hideLevel }) => {
           </Select>
         </FormControl>
       </div>
-    </header>
+    </Root>
   );
 };
 
