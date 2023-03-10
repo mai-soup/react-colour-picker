@@ -88,10 +88,16 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
       palettes.length > 0
         ? palettes.map(p => p.colors).flat()
         : seedColours.map(p => p.colors).flat();
-    var i = Math.floor(Math.random() * allColors.length);
-    // TODO: make sure cant add duplicates either by colour or name
-    const randomColor = allColors[i];
-    console.log(randomColor, allColors, palettes);
+
+    let randomColor;
+    let isDuplicate = false;
+    do {
+      randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+      isDuplicate = colors.some(
+        c => c.name === randomColor.name || c.hex === randomColor.hex
+      );
+    } while (isDuplicate);
+
     updateColours([...colours, randomColor]);
   };
 
