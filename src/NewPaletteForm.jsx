@@ -9,6 +9,7 @@ import {
 import { ChevronLeft as ChevronLeftIcon } from "@mui/icons-material";
 
 import { ValidatorForm } from "react-material-ui-form-validator";
+import seedColours from "./seedColours";
 
 import DraggableColourList from "./DraggableColourList";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +29,7 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   const [currentColour, setColour] = useState("#008080");
-  const [colours, updateColours] = useState(palettes[0].colors);
+  const [colours, updateColours] = useState(seedColours[0].colors);
   const [currentName, setName] = useState("");
   const [newPaletteName, setNewPaletteName] = useState("");
 
@@ -83,10 +84,14 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
 
   const addRandomColour = () => {
     // picks a rand colour from an existing palette
-    const allColors = palettes.map(p => p.colors).flat();
+    const allColors =
+      palettes.length > 0
+        ? palettes.map(p => p.colors).flat()
+        : seedColours.map(p => p.colors).flat();
     var i = Math.floor(Math.random() * allColors.length);
     // TODO: make sure cant add duplicates either by colour or name
     const randomColor = allColors[i];
+    console.log(randomColor, allColors, palettes);
     updateColours([...colours, randomColor]);
   };
 

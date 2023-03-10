@@ -24,7 +24,7 @@ const ColourPickerForm = ({
           handleColorChange(newCol);
         }}
       />
-      <ValidatorForm onSubmit={addNewColour}>
+      <ValidatorForm onSubmit={addNewColour} instantValidate={false}>
         <StyledInput
           label="Colour Name"
           value={currentName}
@@ -49,7 +49,7 @@ const ColourPickerForm = ({
           disabled={colours.length >= maxColours}
           type="submit"
         >
-          Add Colour
+          {colours.length >= maxColours ? "Palette Full" : "Add Colour"}
         </AddColourButton>
       </ValidatorForm>
     </Root>
