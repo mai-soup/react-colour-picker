@@ -183,6 +183,7 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
           handleDeleteColour={handleDeleteColour}
           axis="xy"
           onSortEnd={onSortEnd}
+          distance={10}
         />
       </Main>
     </Box>

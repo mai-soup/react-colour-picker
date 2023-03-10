@@ -8,7 +8,7 @@ export const Root = styled("div")({
   display: "inline-block",
   position: "relative",
   textTransform: "uppercase",
-  marginBottom: "-7px",
+  marginBottom: "-8.5px",
   cursor: "grab",
   "&:hover svg": {
     color: "white",
@@ -29,6 +29,7 @@ export const Content = styled("div")({
   fontSize: "12px",
   display: "flex",
   justifyContent: "space-between",
+  userSelect: "none",
 });
 
 export const StyledDeleteIcon = styled(DeleteIcon)({
