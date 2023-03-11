@@ -93,8 +93,8 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
     let isDuplicate = false;
     do {
       randomColor = allColors[Math.floor(Math.random() * allColors.length)];
-      isDuplicate = colors.some(
-        c => c.name === randomColor.name || c.hex === randomColor.hex
+      isDuplicate = colours.some(
+        c => c.name === randomColor.name || c.color === randomColor.color
       );
     } while (isDuplicate);
 
