@@ -39,11 +39,7 @@ const PaletteMetaForm = ({ handlePaletteSubmission }) => {
 
   return (
     <div>
-      <Button
-        variant="secondary"
-        onClick={handleClickOpen}
-        sx={{ backgroundColor: "#1976d2", color: "white" }}
-      >
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>
         Save Palette
       </Button>
       <Dialog open={open === STATE_FORM_OPEN} onClose={handleClose}>

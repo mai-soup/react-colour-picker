@@ -165,11 +165,10 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
               Clear palette
             </StyledButton>
             <StyledButton
-              StyledButton="contained"
+              variant="contained"
               color="primary"
               disabled={colours.length >= maxColours}
               onClick={addRandomColour}
-              sx={{ backgroundColor: "#1976d2", color: "white" }}
             >
               Random colour
             </StyledButton>
