@@ -26,18 +26,6 @@ const PaletteFormNav = ({
           Create a New Palette
         </Typography>
       </Toolbar>
-      <div>
-        <PaletteMetaForm handlePaletteSubmission={handlePaletteSubmission} />
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          Go Back
-        </Button>
-      </div>
     </AppBar>
   );
 };

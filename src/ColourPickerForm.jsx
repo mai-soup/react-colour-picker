@@ -6,6 +6,7 @@ import {
   StyledInput,
   AddColourButton,
 } from "./styles/ColourPickerForm.styles";
+import PaletteMetaForm from "./PaletteMetaForm";
 
 const ColourPickerForm = ({
   colours,
@@ -15,6 +16,7 @@ const ColourPickerForm = ({
   currentName,
   handleNameChange,
   maxColours,
+  handlePaletteSubmission,
 }) => {
   return (
     <Root>
@@ -42,6 +44,7 @@ const ColourPickerForm = ({
         <AddColourButton
           variant="contained"
           color="primary"
+          margin="normal"
           style={{
             backgroundColor:
               colours.length >= maxColours ? "grey" : currentColour,
@@ -52,6 +55,7 @@ const ColourPickerForm = ({
           {colours.length >= maxColours ? "Palette Full" : "Add Colour"}
         </AddColourButton>
       </ValidatorForm>
+      <PaletteMetaForm handlePaletteSubmission={handlePaletteSubmission} />
     </Root>
   );
 };

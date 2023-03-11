@@ -15,7 +15,6 @@ export const StyledChromePicker = styled(ChromePicker)({
 export const AddColourButton = styled(Button)({
   width: "100%",
   padding: "1rem",
-  marginTop: "1rem",
   fontSize: "2rem",
 });
 

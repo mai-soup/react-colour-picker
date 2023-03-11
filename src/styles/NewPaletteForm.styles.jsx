@@ -61,6 +61,10 @@ export const Container = styled("div")({
   textAlign: "center",
 });
 
-export const ButtonsContainer = styled("div")({ width: "100%" });
-
-export const StyledButton = styled(Button)({ width: "50%" });
+export const ButtonsContainer = styled("div")({
+  width: "100%",
+  my: 2,
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-evenly",
+});

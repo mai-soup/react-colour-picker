@@ -5,6 +5,7 @@ import {
   CssBaseline,
   Typography,
   IconButton,
+  Button,
 } from "@mui/material";
 import { ChevronLeft as ChevronLeftIcon } from "@mui/icons-material";
 
@@ -22,7 +23,6 @@ import {
   DrawerHeader,
   Container,
   ButtonsContainer,
-  StyledButton,
 } from "./styles/NewPaletteForm.styles";
 
 const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
@@ -157,21 +157,21 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
             Design Your Palette
           </Typography>
           <ButtonsContainer>
-            <StyledButton
+            <Button
               variant="contained"
               color="secondary"
               onClick={clearColours}
             >
               Clear palette
-            </StyledButton>
-            <StyledButton
+            </Button>
+            <Button
               variant="contained"
               color="primary"
               disabled={colours.length >= maxColours}
               onClick={addRandomColour}
             >
               Random colour
-            </StyledButton>
+            </Button>
           </ButtonsContainer>
           <ColourPickerForm
             {...{
@@ -182,6 +182,7 @@ const NewPaletteForm = ({ savePalette, palettes, maxColours = 20 }) => {
               currentName,
               handleNameChange,
               maxColours,
+              handlePaletteSubmission,
             }}
           />
         </Container>

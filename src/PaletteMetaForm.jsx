@@ -1,4 +1,5 @@
 import Button from "@mui/material/Button";
+import { Box } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -7,6 +8,7 @@ import { React, useState } from "react";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import { useNavigate } from "react-router-dom";
 
 const STATE_FORM_OPEN = 345;
 const STATE_EMOJIS_OPEN = 346;
@@ -16,6 +18,7 @@ const PaletteMetaForm = ({ handlePaletteSubmission }) => {
   // TODO: style the dialog
   const [open, setOpen] = useState(STATE_CLOSED);
   const [currentInput, setInput] = useState("");
+  const navigate = useNavigate();
   const handleInput = e => {
     setInput(e.target.value);
   };
@@ -38,10 +41,28 @@ const PaletteMetaForm = ({ handlePaletteSubmission }) => {
   };
 
   return (
-    <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        Save Palette
-      </Button>
+    <div style={{ width: "100%" }}>
+      <Box
+        sx={{
+          my: 2,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Go Back
+        </Button>
+        <Button variant="contained" color="success" onClick={handleClickOpen}>
+          Save Palette
+        </Button>
+      </Box>
       <Dialog open={open === STATE_FORM_OPEN} onClose={handleClose}>
         <DialogTitle>Enter Palette Name</DialogTitle>
         <ValidatorForm onSubmit={handleNamePicked}>
