@@ -1,6 +1,5 @@
-import { Button, Toolbar, Typography, IconButton } from "@mui/material";
+import { Toolbar, Typography, IconButton } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
-import PaletteMetaForm from "./PaletteMetaForm";
 import { AppBar } from "./styles/NewPaletteForm.styles";
 import { useNavigate } from "react-router-dom";
 

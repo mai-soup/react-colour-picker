@@ -5,16 +5,19 @@ export const Root = styled("header")({
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-start",
-  height: "6vh",
-  minHeight: "3rem",
+  height: "7vh",
+  minHeight: "3.5rem",
 });
 
 export const Logo = styled("div")({
   marginRight: "15px",
   padding: "0 13px",
-  fontSize: "22px",
+  fontSize: "1.5rem",
   [sizes.down("md")]: {
-    fontSize: "16px",
+    fontSize: "1.15rem",
+  },
+  [sizes.down("xs")]: {
+    fontSize: "1rem",
   },
   backgroundColor: "#eceff1",
   height: "100%",
@@ -30,6 +33,9 @@ export const SliderContainer = styled("div")({
   width: "340px",
   [sizes.down("sm")]: {
     width: "150px",
+  },
+  [sizes.down("xs")]: {
+    width: "100px",
   },
   margin: "0 10px",
   display: "inline-block",

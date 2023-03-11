@@ -36,7 +36,7 @@ const Navbar = ({ level, levelChanged, handleFormatChange, hideLevel }) => {
         </LevelControlsContainer>
       )}
       <div className="select-container">
-        <FormControl size="small">
+        <FormControl size="small" sx={{ mr: 1 }}>
           <InputLabel id="format-select-label">Format</InputLabel>
           <Select
             labelId="format-select-label"
