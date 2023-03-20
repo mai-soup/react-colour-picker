@@ -17,7 +17,7 @@ export const Logo = styled("div")({
     fontSize: "1.15rem",
   },
   [sizes.down("xs")]: {
-    fontSize: "1rem",
+    fontSize: "0.5rem",
   },
   backgroundColor: "#eceff1",
   height: "100%",
